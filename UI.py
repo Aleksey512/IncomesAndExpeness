@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlTableModel
 
-from db import income, add
+from db import add
 
 class Ui_GroupBox(object):
 

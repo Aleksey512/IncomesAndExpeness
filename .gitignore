@@ -1,0 +1,4 @@
+./venv
+/venv/
+./myDB.db
+/myDB.db
