@@ -1,4 +1,15 @@
 ./venv
 /venv/
+venv/
+
 ./myDB.db
 /myDB.db
+myDB.db/
+
+./.idea
+/.idea/
+.idea/
+
+/__pycache__/
+__pycache__/
+./__pycache__/
