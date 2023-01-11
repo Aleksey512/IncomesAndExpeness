@@ -1,51 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupBox</class>
- <widget class="QGroupBox" name="GroupBox">
+ <class>QGroupBox</class>
+ <widget class="QGroupBox" name="QGroupBox">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>691</width>
-    <height>513</height>
+    <width>966</width>
+    <height>664</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GroupBox</string>
+   <string>Доходы/Расходы</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="year_label">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="text">
+      <string>2022</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Доход(План)</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label">
+       <item row="7" column="0">
+        <widget class="QLabel" name="tab1_label_4">
          <property name="text">
-          <string>Название</string>
+          <string>Выберите дату</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QTableWidget" name="tableWidget">
+       <item row="3" column="0" colspan="4">
+        <widget class="QTableWidget" name="tab1_table">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <property name="rowCount">
           <number>1</number>
          </property>
          <property name="columnCount">
-          <number>2</number>
+          <number>4</number>
          </property>
          <row/>
-         <column/>
-         <column/>
+         <column>
+          <property name="text">
+           <string>Id</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Дата</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Категория</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Кол-во, руб.</string>
+          </property>
+         </column>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <item row="5" column="0">
+        <widget class="QLabel" name="tab1_label">
+         <property name="text">
+          <string>Категория</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QComboBox" name="tab1_cbox_2"/>
+       </item>
+       <item row="8" column="0" colspan="2">
+        <widget class="QDateEdit" name="tab1_dateEdit">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QPushButton" name="tab1_pushButton_3">
+         <property name="styleSheet">
+          <string notr="true">background-color:  rgb(255, 47, 47)</string>
+         </property>
+         <property name="text">
+          <string>Удалить выделенные строки</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2" colspan="2">
+        <widget class="QDoubleSpinBox" name="tab1_value">
          <property name="decimals">
           <number>2</number>
          </property>
@@ -54,48 +173,796 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>value</string>
+       <item row="8" column="2" colspan="2">
+        <widget class="QPushButton" name="tab1_pushButton">
+         <property name="styleSheet">
+          <string notr="true">background-color: green;</string>
          </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLineEdit" name="lineEdit">
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton">
          <property name="text">
           <string>Добавить</string>
          </property>
         </widget>
        </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QComboBox" name="tab1_cbox"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QDateEdit" name="tab1_dateEdit_2">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QPushButton" name="tab1_pushButton_2">
+         <property name="text">
+          <string>Посмотреть за месяц</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" colspan="2">
+        <widget class="QPushButton" name="tab1_pushButton_4">
+         <property name="text">
+          <string>Посмотреть за день</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLabel" name="tab1_label_2">
+         <property name="text">
+          <string>Кол-во, руб.</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Расход(План)</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="tab2_cbox"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="tab2_pushButton_2">
+         <property name="text">
+          <string>Посмотреть за месяц</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QDateEdit" name="tab2_dateEdit_2">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="tab2_pushButton_4">
+         <property name="text">
+          <string>Посмотреть за день</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QTableWidget" name="tab2_table">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="rowCount">
+          <number>1</number>
+         </property>
+         <property name="columnCount">
+          <number>4</number>
+         </property>
+         <row/>
+         <column>
+          <property name="text">
+           <string>Id</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Дата</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Категория</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Кол-во, руб.</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="tab2_pushButton_3">
+         <property name="text">
+          <string>Удалить выделенные строки</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="tab2_label">
+         <property name="text">
+          <string>Категория</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="tab2_label_2">
+         <property name="text">
+          <string>Кол-во, руб.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="tab2_value">
+         <property name="decimals">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <double>10000000000000000905969664.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="tab2_label_1">
+         <property name="text">
+          <string>Выберите дату</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QDateEdit" name="tab2_dateEdit">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="tab2_pushButton">
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QComboBox" name="tab2_cbox_2"/>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Расход(План)</string>
+       <string>Доход(Факт)</string>
       </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="tab3_cbox"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="tab3_pushButton_2">
+         <property name="text">
+          <string>Посмотреть за месяц</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QDateEdit" name="tab3_dateEdit_2">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="tab3_pushButton_4">
+         <property name="text">
+          <string>Посмотреть за день</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QTableWidget" name="tab3_table">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="rowCount">
+          <number>1</number>
+         </property>
+         <property name="columnCount">
+          <number>4</number>
+         </property>
+         <row/>
+         <column>
+          <property name="text">
+           <string>Id</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Дата</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Категория</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Кол-во, руб.</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="tab3_pushButton_3">
+         <property name="text">
+          <string>Удалить выделенные строки</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="tab3_label">
+         <property name="text">
+          <string>Категория</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="tab3_label_1">
+         <property name="text">
+          <string>Кол-во, руб.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="tab3_value">
+         <property name="decimals">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <double>10000000000000000905969664.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="tab3_label_2">
+         <property name="text">
+          <string>Выберите дату</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QDateEdit" name="tab3_dateEdit">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="tab3_pushButton">
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QComboBox" name="tab3_cbox_2"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Доход(Факт)</string>
+       <string>Расход(Факт)</string>
       </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="tab4_cbox"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="tab4_pushButton_2">
+         <property name="text">
+          <string>Посмотреть за месяц</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QDateEdit" name="tab4_dateEdit_2">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="tab4_pushButton_4">
+         <property name="text">
+          <string>Посмотреть за день</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QTableWidget" name="tab4_table">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="rowCount">
+          <number>1</number>
+         </property>
+         <property name="columnCount">
+          <number>4</number>
+         </property>
+         <row/>
+         <column>
+          <property name="text">
+           <string>Id</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Дата</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Категория</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Кол-во, руб.</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="tab4_pushButton_3">
+         <property name="text">
+          <string>Удалить выделенные строки</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="tab4_label_5">
+         <property name="text">
+          <string>Категория</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="tab4_label_4">
+         <property name="text">
+          <string>Кол-во, руб.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="tab4_value">
+         <property name="decimals">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <double>10000000000000000905969664.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="tab4_label_3">
+         <property name="text">
+          <string>Выберите дату</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QDateEdit" name="tab4_dateEdit">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::LocalTime</enum>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="tab4_pushButton">
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QComboBox" name="tab4_cbox_2"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Расход(Факт)</string>
+       <string>Статистика по доходу</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="tab5_pie_year">
+             <property name="text">
+              <string>Распределение за год по категориям</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab5_bar_year">
+             <property name="text">
+              <string>Гистограмма за год</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QComboBox" name="tab5_cbox"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab5_pie_month">
+             <property name="text">
+              <string>Распределение за месяц по категориям</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab5_plot_month">
+             <property name="text">
+              <string>Изменение за месяц по дням</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="tab5_widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
+     <widget class="QWidget" name="tab_6">
       <attribute name="title">
-       <string>Статистика</string>
+       <string>Статистика по расходу</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QPushButton" name="tab6_pie_year">
+             <property name="text">
+              <string>Распределение за год по категориям</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab6_bar_year">
+             <property name="text">
+              <string>Гистограмма за год</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QComboBox" name="tab6_cbox"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab6_pie_month">
+             <property name="text">
+              <string>Распределение за месяц по категориям</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tab6_plot_month">
+             <property name="text">
+              <string>Изменение за месяц по дням</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="tab6_widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_7">
+      <attribute name="title">
+       <string>Общая статистика</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QPushButton" name="tab7_hist">
+           <property name="text">
+            <string>Гистограмма</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="tab7_plot">
+           <property name="text">
+            <string>Линейная</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="tab7_widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
