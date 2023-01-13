@@ -1,9 +1,31 @@
 import matplotlib.pyplot as plt
+
 import pandas as pd
 import numpy as np
+from scipy.signal import savgol_filter
 
 from datetime import date
 from calendar import monthrange, Calendar
+
+import warnings
+
+warnings.filterwarnings(action="once")
+
+large = 22
+med = 16
+small = 12
+params = {
+    "axes.titlesize": med,
+    "legend.fontsize": large,
+    "figure.figsize": (12, 8),
+    "axes.labelsize": med,
+    "axes.titlesize": med,
+    "xtick.labelsize": small,
+    "ytick.labelsize": med,
+    "figure.titlesize": large,
+}
+plt.rcParams.update(params)
+plt.style.use("seaborn-v0_8-whitegrid")
 
 calendar = Calendar()
 
@@ -22,59 +44,80 @@ months_dict = {
     12: "Декабрь",
 }
 
+months_dict_plural = {
+    1: "Января",
+    2: "Февраля",
+    3: "Марта",
+    4: "Апреля",
+    5: "Мая",
+    6: "Июня",
+    7: "Июля",
+    8: "Августа",
+    9: "Сентября",
+    10: "Октября",
+    11: "Ноября",
+    12: "Декабря",
+}
 
-def all_days():
+
+
+def first_and_fifth_day():
+    """
+    Функция для создания массива каждого 1 и 15 дней, каждого месяца
+    :param: void
+    :return:  numpy.array
+    """
     all_days = []
     for x in np.arange(1, 13):
-        for y in np.fromiter(calendar.itermonthdays(date.today().year, x), dtype="int32"):
-            if y != 0:
+        for y in np.fromiter(
+            calendar.itermonthdays(date.today().year, x), dtype="int32"
+        ):
+            if y != 0 and (y == 1 or y == 15):
                 all_days.append(date(date.today().year, x, y))
     np_all_days = np.array(all_days)
     return np_all_days
 
 
 def custom_read(query):
-    return pd.DataFrame({i: j.__dict__ for i, j in enumerate(query.all())}, ).T.drop(columns='_sa_instance_state')
+    """
+    Возвращает pandas DataFrame из Sqlalchemy.query запроса
+    """
+    return pd.DataFrame(
+        {i: j.__dict__ for i, j in enumerate(query.all())},
+    ).T.drop(columns="_sa_instance_state")
 
 
 def pie_month(query, name):
-    data = {
-        "Name": [],
-        "Value": [],
-        "Date": [],
-        "Fact": [],
-    }
-
-    for q in query:
-        q_as_dict = q.__dict__
-
-        data["Name"].append(q_as_dict["name"])
-        data["Value"].append(q_as_dict["value"])
-        data["Date"].append(q_as_dict["date"])
-        data["Fact"].append(q_as_dict["fact"])
-
-    df = pd.DataFrame(data=data)
-    df["Date"] = pd.to_datetime(df["Date"])
+    """
+    Функция создает круговую диаграмму
+    :param query: Sqlalchemy.query
+    :param name: str
+    :return fig : matplotlib.Figure
+    """
+    df = custom_read(query)
+    df["date"] = pd.to_datetime(df["date"])
 
     def func(pct):
         return "{:1.2f}%".format(pct)
 
     fig, ax = plt.subplots(figsize=(6, 3), nrows=1, ncols=2)
 
-    data_fact = df[df["Fact"] == 1][["Name", "Value"]].groupby("Name")["Value"].sum()
+    data_fact = df[df["fact"] == 1][["name", "value"]].groupby("name")["value"].sum()
     data_not_fact = (
-        df[df["Fact"] == 0][["Name", "Value"]].groupby("Name")["Value"].sum()
+        df[df["fact"] == 0][["name", "value"]].groupby("name")["value"].sum()
     )
 
-    wedges, texts, autotext = ax[0].pie(
-        data_fact, autopct=lambda pct: func(pct)
-    )
+    wedges, texts, autotext = ax[0].pie(data_fact, autopct=lambda pct: func(pct))
     wedges_1, texts_1, autotext_1 = ax[1].pie(
         data_not_fact, autopct=lambda pct: func(pct)
     )
 
-    ax[0].set_title(f"Фактическое распределение \n{name}", pad=16, color="navy", fontsize=16)
-    ax[1].set_title(f"Плановое распределение \n{name}", pad=16, color="navy", fontsize=16)
+    ax[0].set_title(
+        f"Фактическое распределение \n{name}", pad=16, color="navy", fontsize=16
+    )
+    ax[1].set_title(
+        f"Плановое распределение \n{name}", pad=16, color="navy", fontsize=16
+    )
 
     ax[0].legend(
         wedges,
@@ -98,30 +141,23 @@ def pie_month(query, name):
 
 
 def plot_month(query, name, days_in_month: int):
-    data = {
-        "Name": [],
-        "Value": [],
-        "Date": [],
-        "Fact": [],
-    }
-
-    for q in query:
-        q_as_dict = q.__dict__
-
-        data["Name"].append(q_as_dict["name"])
-        data["Value"].append(q_as_dict["value"])
-        data["Date"].append(q_as_dict["date"])
-        data["Fact"].append(q_as_dict["fact"])
-
-    df = pd.DataFrame(data=data)
-    df["Date"] = pd.to_datetime(df["Date"]).dt.day
+    """
+    Функция создает линейную диаграмму
+    :param query: Sqlalchemy.query
+    :param name: str
+    :param days_in_month : int
+    :return fig : matplotlib.Figure
+    """
+    df = custom_read(query)
+    df["date"] = pd.to_datetime(df["date"]).dt.day
 
     fig, ax = plt.subplots(figsize=(6, 3))
 
-    data_fact = df[df["Fact"] == 1][["Date", "Value"]].groupby("Date")["Value"].sum()
+    data_fact = df[df["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
     data_not_fact = (
-        df[df["Fact"] == 0][["Date", "Value"]].groupby("Date")["Value"].sum()
+        df[df["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
     )
+
 
     ax.plot(data_fact, label="Фактическое", color="red", alpha=0.8)
     ax.plot(data_not_fact, label="Плановое", color="green", alpha=0.8)
@@ -129,7 +165,10 @@ def plot_month(query, name, days_in_month: int):
     ax.set_xlabel("День")
     ax.set_ylabel("Кол-во, руб.")
     ax.set_xticks(list(range(0, days_in_month, 1)) + [days_in_month])
-    ax.set_xticklabels(list(x if x % 2 == 0 else None for x in range(0, days_in_month, 1)) + [days_in_month])
+    ax.set_xticklabels(
+        list(x if x % 2 == 0 else None for x in range(0, days_in_month, 1))
+        + [days_in_month]
+    )
     ax.legend(title="Изменение", loc="upper right")
     ax.grid(color="grey", linestyle=":", linewidth=0.5)
     ax.set_title(f"Изменение \n{name}", pad=16, color="navy", fontsize=16)
@@ -140,37 +179,27 @@ def plot_month(query, name, days_in_month: int):
 
 
 def bar_year(query, name, color="#1f77b4"):
-    data = {
-        "Name": [],
-        "Value": [],
-        "Date": [],
-        "Fact": [],
-    }
-
-    for q in query:
-        q_as_dict = q.__dict__
-
-        data["Name"].append(q_as_dict["name"])
-        data["Value"].append(q_as_dict["value"])
-        data["Date"].append(q_as_dict["date"])
-        data["Fact"].append(q_as_dict["fact"])
-
-    df = pd.DataFrame(data=data)
-    df["Date"] = pd.to_datetime(df["Date"]).dt.month
+    """
+    Функция создает столбчатую диаграмму
+    :param query: Sqlalchemy.query
+    :param name: str
+    :param color default='#1f77b4' : str
+    :return fig : matplotlib.Figure
+    """
+    df = custom_read(query)
+    df["date"] = pd.to_datetime(df["date"]).dt.month
 
     fig, ax = plt.subplots(figsize=(6, 3), nrows=1, ncols=2, sharey=True)
 
-    data_fact = df[df["Fact"] == 1][["Date", "Value"]].groupby("Date")["Value"].sum()
+    data_fact = df[df["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
     data_not_fact = (
-        df[df["Fact"] == 0][["Date", "Value"]].groupby("Date")["Value"].sum()
+        df[df["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
     )
 
     lenght_fact = list(months_dict[i] for i in data_fact.index)
     lenght_not_fact = list(months_dict[i] for i in data_not_fact.index)
 
-    ax[0].bar(
-        lenght_fact, data_fact, label="Факт", color=color
-    )
+    ax[0].bar(lenght_fact, data_fact, label="Факт", color=color)
     ax[1].bar(
         lenght_not_fact,
         data_not_fact,
@@ -200,6 +229,13 @@ def bar_year(query, name, color="#1f77b4"):
 
 
 def plot_year_all(query_inc, query_exp, name):
+    """
+
+    :param query_inc: Sqlalchemy.query
+    :param query_exp: Sqlalchemy.query
+    :param name: str
+    :return: matplotlib.Figure
+    """
     df_inc = custom_read(query_inc)
     df_exp = custom_read(query_exp)
 
@@ -208,26 +244,40 @@ def plot_year_all(query_inc, query_exp, name):
 
     fig, ax = plt.subplots(figsize=(6, 3))
 
-    inc_fact = df_inc[df_inc["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
-    inc_not_fact = df_inc[df_inc["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
+    inc_fact = (
+        df_inc[df_inc["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
+    )
+    inc_not_fact = (
+        df_inc[df_inc["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
+    )
 
-    exp_fact = df_exp[df_exp["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
-    exp_not_fact = df_exp[df_exp["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
+    exp_fact = (
+        df_exp[df_exp["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
+    )
+    exp_not_fact = (
+        df_exp[df_exp["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
+    )
 
     ax.plot(inc_fact, label="Фактический доход", color="green")
-    ax.plot(inc_not_fact, label="Плановый доход", color="green", linestyle="--", alpha=0.6)
+    ax.plot(
+        inc_not_fact, label="Плановый доход", color="green", linestyle="--", alpha=0.6
+    )
 
     ax.plot(exp_fact, label="Фактический расход", color="red")
-    ax.plot(exp_not_fact, label="Плановый расход", color="red", linestyle="--", alpha=0.6)
+    ax.plot(
+        exp_not_fact, label="Плановый расход", color="red", linestyle="--", alpha=0.6
+    )
 
-    all_d = all_days()
+    labels = first_and_fifth_day()
 
     ax.set_xlabel("День в году")
     ax.set_ylabel("Кол-во, руб.")
-    ax.set_xticks(all_d[(all_d==date(date.today().year, 1, 1))])
-    # ax.set_xticklabels(np.where((all_d.day==1)&(all_d.day==15), all_d, None))
+    ax.set_xticks(labels)
+    ax.set_xticklabels(
+        list(f"{label.day}-{months_dict_plural[label.month]}" for label in labels),
+        rotation=45,
+    )
     ax.legend(title="Изменение", loc="upper right")
-    ax.grid(color="grey", linestyle=":", linewidth=0.5)
     ax.set_title(f"Изменение \n{name}", pad=16, color="navy", fontsize=16)
 
     return fig

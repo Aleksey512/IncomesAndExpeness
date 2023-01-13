@@ -8,7 +8,7 @@ from sqlalchemy import (
     Float,
     Date,
     Boolean,
-    MetaData
+    MetaData,
 )
 from sqlalchemy.orm import Session, declarative_base, relationship
 
@@ -21,7 +21,7 @@ Base = declarative_base()
 
 class Income(Base):
     """
-    Таблица прихода
+    Модель дохода
     """
 
     __tablename__ = "income"
@@ -33,12 +33,12 @@ class Income(Base):
     fact = Column(Boolean, default=False)  # Фактический приход или нет
 
     def __repr__(self):
-        return f"Приход(id={self.id!r}, date={self.date!r}, value={self.value!r}, fact={self.fact!r})"
+        return f"Доход(id={self.id!r}, date={self.date!r}, value={self.value!r}, fact={self.fact!r})"
 
 
 class Expeness(Base):
     """
-    Таблица расхода
+    Модель расхода
     """
 
     __tablename__ = "expeness"
@@ -50,7 +50,7 @@ class Expeness(Base):
     fact = Column(Boolean, default=False)  # Фактический расход или нет
 
     def __repr__(self):
-        return f"Приход(id={self.id!r}, date={self.date!r}, value={self.value!r}, fact={self.fact!r})"
+        return f"Расход(id={self.id!r}, date={self.date!r}, value={self.value!r}, fact={self.fact!r})"
 
 
 Base.metadata.create_all(engine)

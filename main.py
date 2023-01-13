@@ -72,7 +72,11 @@ incomes_dict = {
 
 
 def selected_month(index):
-    """Если месяц от 1 до 9 добавляет 0 перед номером месяца"""
+    """
+    Если месяц от 1 до 9 добавляет 0 перед номером месяца
+    :param index: int
+    :return: index: int
+    """
     if 1 <= index <= 9:
         return f"0{index}"
     else:
@@ -147,6 +151,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab7_plot.clicked.connect(self.tab7_plot_clicked)
 
     def tab1_add_button_clicked(self):
+        """
+        Действие кнопки "Добавить" в 1 табе
+        """
         with session:
             income = db.Income(
                 name=self.tab1_cbox_2.currentText(),
@@ -162,6 +169,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             session.commit()
 
     def tab1_month_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за месяц" в 1 табе
+        """
         self.tab1_table.setRowCount(0)
         index = self.tab1_cbox.currentIndex() + 1
         ses_query = session.query(db.Income).filter(
@@ -192,6 +202,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab1_table.resizeColumnsToContents()
 
     def tab1_day_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за день" в 1 табе
+        """
         self.tab1_table.setRowCount(0)
         ses_query = session.query(db.Income).filter(
             and_(
@@ -223,6 +236,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab1_table.resizeColumnsToContents()
 
     def tab1_delete_row_button_clicked(self):
+        """
+        Действие кнопки "Удалить" в 1 табе
+        """
         id = self.tab1_table.item(self.tab1_table.currentRow(), 0).text()
         stmt = delete(db.Income).where(db.Income.id == id)
         self.tab1_table.removeRow(self.tab1_table.currentRow())
@@ -230,6 +246,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         session.commit()
 
     def tab2_add_button_clicked(self):
+        """
+        Действие кнопки "Добавить" во 2 табе
+        """
         with session:
             expeness = db.Expeness(
                 name=self.tab2_cbox_2.currentText(),
@@ -245,6 +264,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             session.commit()
 
     def tab2_month_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за месяц" во 2 табе
+        """
         self.tab2_table.setRowCount(0)
         index = self.tab2_cbox.currentIndex() + 1
         ses_query = session.query(db.Expeness).filter(
@@ -275,6 +297,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab2_table.resizeColumnsToContents()
 
     def tab2_day_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за день" во 2 табе
+        """
         self.tab2_table.setRowCount(0)
         ses_query = session.query(db.Expeness).filter(
             and_(
@@ -306,6 +331,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab2_table.resizeColumnsToContents()
 
     def tab2_delete_row_button_clicked(self):
+        """
+        Действие кнопки "Удалить" во 2 табе
+        """
         id = self.tab2_table.item(self.tab2_table.currentRow(), 0).text()
         stmt = delete(db.Expeness).where(db.Expeness.id == id)
         self.tab2_table.removeRow(self.tab2_table.currentRow())
@@ -313,6 +341,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         session.commit()
 
     def tab3_add_button_clicked(self):
+        """
+        Действие кнопки "Добавить" в 3 табе
+        """
         with session:
             income = db.Income(
                 name=self.tab3_cbox_2.currentText(),
@@ -328,6 +359,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             session.commit()
 
     def tab3_month_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за месяц" в 3 табе
+        """
         self.tab3_table.setRowCount(0)
         index = self.tab3_cbox.currentIndex() + 1
         ses_query = session.query(db.Income).filter(
@@ -358,6 +392,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab3_table.resizeColumnsToContents()
 
     def tab3_day_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за день" в 3 табе
+        """
         self.tab3_table.setRowCount(0)
         ses_query = session.query(db.Income).filter(
             and_(
@@ -389,6 +426,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab3_table.resizeColumnsToContents()
 
     def tab3_delete_row_button_clicked(self):
+        """
+        Действие кнопки "Удалить" в 3 табе
+        """
         id = self.tab3_table.item(self.tab3_table.currentRow(), 0).text()
         stmt = delete(db.Income).where(db.Income.id == id)
         self.tab3_table.removeRow(self.tab3_table.currentRow())
@@ -396,6 +436,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         session.commit()
 
     def tab4_add_button_clicked(self):
+        """
+        Действие кнопки "Добавить" в 4 табе
+        """
         with session:
             expeness = db.Expeness(
                 name=self.tab4_cbox_2.currentText(),
@@ -411,6 +454,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             session.commit()
 
     def tab4_month_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за месяц" в 4 табе
+        """
         self.tab4_table.setRowCount(0)
         index = self.tab4_cbox.currentIndex() + 1
         ses_query = session.query(db.Expeness).filter(
@@ -441,6 +487,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab4_table.resizeColumnsToContents()
 
     def tab4_day_show_button_clicked(self):
+        """
+        Действие кнопки "Показать за день" в 4 табе
+        """
         self.tab4_table.setRowCount(0)
         ses_query = session.query(db.Expeness).filter(
             and_(
@@ -472,6 +521,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab4_table.resizeColumnsToContents()
 
     def tab4_delete_row_button_clicked(self):
+        """
+        Действие кнопки "Удалить" в 4 табе
+        """
         id = self.tab4_table.item(self.tab4_table.currentRow(), 0).text()
         stmt = delete(db.Expeness).where(db.Expeness.id == id)
         self.tab4_table.removeRow(self.tab4_table.currentRow())
@@ -521,7 +573,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig.clear()
             self.tab5_layout.removeWidget(self.tab5_canavas)
             self.tab5_layout.removeWidget(self.tab5_navbar)
-            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}", days_in_month)
+            self.fig = plot_month(
+                query, f"дохода по дням за {months_dict[index]}", days_in_month
+            )
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -531,7 +585,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab5_layout.addWidget(self.tab5_canavas)
 
         except:
-            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}", days_in_month)
+            self.fig = plot_month(
+                query, f"дохода по дням за {months_dict[index]}", days_in_month
+            )
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -643,7 +699,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig.clear()
             self.tab6_layout.removeWidget(self.tab6_canavas)
             self.tab6_layout.removeWidget(self.tab6_navbar)
-            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}", days_in_month)
+            self.fig = plot_month(
+                query, f"расхода по дням за {months_dict[index]}", days_in_month
+            )
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -653,7 +711,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab6_layout.addWidget(self.tab6_canavas)
 
         except:
-            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}", days_in_month)
+            self.fig = plot_month(
+                query, f"расхода по дням за {months_dict[index]}", days_in_month
+            )
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -731,19 +791,29 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig7.clear()
             self.tab7_layout.removeWidget(self.tab7_canavas)
             self.tab7_layout.removeWidget(self.tab7_navbar)
-            self.fig7 = plot_year_all(query_inc=inc_query,
-                                      query_exp=exp_query,
-                                      name=f"Общая статистика за год по месяцам")
+            self.fig7 = plot_year_all(
+                query_inc=inc_query,
+                query_exp=exp_query,
+                name=f"Общая статистика за год по месяцам",
+            )
             self.tab7_canavas = MyMplCanavas(self.fig7)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab7_layout.addWidget(self.tab7_navbar)
             self.tab7_layout.addWidget(self.tab7_canavas)
         except:
-            self.fig7 = plot_year_all(query_inc=inc_query,
-                                      query_exp=exp_query,
-                                      name=f"Общая статистика за год по месяцам")
+            self.fig7 = plot_year_all(
+                query_inc=inc_query,
+                query_exp=exp_query,
+                name=f"Общая статистика за год по месяцам",
+            )
             self.tab7_canavas = MyMplCanavas(self.fig7)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab7_layout.addWidget(self.tab7_navbar)
             self.tab7_layout.addWidget(self.tab7_canavas)
 
@@ -754,7 +824,5 @@ if __name__ == "__main__":
     with open(qssFile, "r") as fh:
         app.setStyleSheet(fh.read())
     w = MainClass()
-    w.resize(1280, 720)
-    w.show()
-
+    w.showMaximized()
     sys.exit(app.exec())
