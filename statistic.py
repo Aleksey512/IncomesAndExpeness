@@ -2,8 +2,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-import db
-
 from datetime import date
 from calendar import monthrange, Calendar
 
@@ -24,6 +22,7 @@ months_dict = {
     12: "Декабрь",
 }
 
+
 def all_days():
     all_days = []
     for x in np.arange(1, 13):
@@ -33,11 +32,12 @@ def all_days():
     np_all_days = np.array(all_days)
     return np_all_days
 
+
 def custom_read(query):
-        return pd.DataFrame({i:j.__dict__ for i,j in enumerate(query.all())},).T.drop(columns='_sa_instance_state')
+    return pd.DataFrame({i: j.__dict__ for i, j in enumerate(query.all())}, ).T.drop(columns='_sa_instance_state')
+
 
 def pie_month(query, name):
-
     data = {
         "Name": [],
         "Value": [],
@@ -75,31 +75,29 @@ def pie_month(query, name):
 
     ax[0].set_title(f"Фактическое распределение \n{name}", pad=16, color="navy", fontsize=16)
     ax[1].set_title(f"Плановое распределение \n{name}", pad=16, color="navy", fontsize=16)
-    
+
     ax[0].legend(
         wedges,
         [f"{index}:\n({value} р.)" for index, value in data_fact.items()],
         title="Категория",
         loc="center left",
         bbox_to_anchor=(-0.25, 0, 0.5, 1),
-        fontsize=14,
+        fontsize=12,
     )
-    
+
     ax[1].legend(
         wedges_1,
         [f"{index}:\n({value} р.)" for index, value in data_not_fact.items()],
         title="Категория",
         loc="center left",
         bbox_to_anchor=(1, 0, 0.5, 1),
-        fontsize=14,
+        fontsize=12,
     )
 
-    
     return fig
 
 
 def plot_month(query, name, days_in_month: int):
-
     data = {
         "Name": [],
         "Value": [],
@@ -131,7 +129,7 @@ def plot_month(query, name, days_in_month: int):
     ax.set_xlabel("День")
     ax.set_ylabel("Кол-во, руб.")
     ax.set_xticks(list(range(0, days_in_month, 1)) + [days_in_month])
-    ax.set_xticklabels(list(x if x%2==0 else None for x in range(0, days_in_month, 1)) + [days_in_month] )
+    ax.set_xticklabels(list(x if x % 2 == 0 else None for x in range(0, days_in_month, 1)) + [days_in_month])
     ax.legend(title="Изменение", loc="upper right")
     ax.grid(color="grey", linestyle=":", linewidth=0.5)
     ax.set_title(f"Изменение \n{name}", pad=16, color="navy", fontsize=16)
@@ -142,7 +140,6 @@ def plot_month(query, name, days_in_month: int):
 
 
 def bar_year(query, name, color="#1f77b4"):
-
     data = {
         "Name": [],
         "Value": [],
@@ -203,21 +200,20 @@ def bar_year(query, name, color="#1f77b4"):
 
 
 def plot_year_all(query_inc, query_exp, name):
-
     df_inc = custom_read(query_inc)
     df_exp = custom_read(query_exp)
 
-    df_inc["date"] = pd.to_datetime(df_inc["date"])
-    df_exp["date"] = pd.to_datetime(df_exp["date"])
+    df_inc["date"] = pd.to_datetime(df_inc["date"]).dt.date
+    df_exp["date"] = pd.to_datetime(df_exp["date"]).dt.date
 
-    fig, ax = plt.subplots(figsize=(6, 3), sharey=True)
+    fig, ax = plt.subplots(figsize=(6, 3))
 
     inc_fact = df_inc[df_inc["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
     inc_not_fact = df_inc[df_inc["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
 
     exp_fact = df_exp[df_exp["fact"] == 1][["date", "value"]].groupby("date")["value"].sum()
     exp_not_fact = df_exp[df_exp["fact"] == 0][["date", "value"]].groupby("date")["value"].sum()
-    
+
     ax.plot(inc_fact, label="Фактический доход", color="green")
     ax.plot(inc_not_fact, label="Плановый доход", color="green", linestyle="--", alpha=0.6)
 
@@ -228,17 +224,10 @@ def plot_year_all(query_inc, query_exp, name):
 
     ax.set_xlabel("День в году")
     ax.set_ylabel("Кол-во, руб.")
-    ax.set_xticks(all_d[all_d==date(2023, 1, 1)])
+    ax.set_xticks(all_d[(all_d==date(date.today().year, 1, 1))])
     # ax.set_xticklabels(np.where((all_d.day==1)&(all_d.day==15), all_d, None))
     ax.legend(title="Изменение", loc="upper right")
     ax.grid(color="grey", linestyle=":", linewidth=0.5)
     ax.set_title(f"Изменение \n{name}", pad=16, color="navy", fontsize=16)
 
     return fig
-
-if __name__ == "__main__":
-    plot_year_all()
-    pie_month()
-    plot_month()
-    bar_year()
-        

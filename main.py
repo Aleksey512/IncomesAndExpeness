@@ -23,7 +23,6 @@ from calendar import monthrange
 
 import time
 
-
 Session = sessionmaker(bind=db.engine)
 session = Session()
 
@@ -729,28 +728,22 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Income.date >= start_year, db.Income.date < end_year)
         )
         try:
-            self.fig.clear()
+            self.fig7.clear()
             self.tab7_layout.removeWidget(self.tab7_canavas)
             self.tab7_layout.removeWidget(self.tab7_navbar)
-            self.fig = plot_year_all(query_inc=inc_query,
-                                     query_exp=exp_query,
-                                     name=f"Общая статистика за год по месяцам")
-            self.tab7_canavas = MyMplCanavas(self.fig)
+            self.fig7 = plot_year_all(query_inc=inc_query,
+                                      query_exp=exp_query,
+                                      name=f"Общая статистика за год по месяцам")
+            self.tab7_canavas = MyMplCanavas(self.fig7)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
-            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
-            time.sleep(0.5)
-            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab7_layout.addWidget(self.tab7_navbar)
             self.tab7_layout.addWidget(self.tab7_canavas)
         except:
-            self.fig = plot_year_all(query_inc=inc_query,
-                                     query_exp=exp_query,
-                                     name=f"Общая статистика за год по месяцам")
-            self.tab7_canavas = MyMplCanavas(self.fig)
+            self.fig7 = plot_year_all(query_inc=inc_query,
+                                      query_exp=exp_query,
+                                      name=f"Общая статистика за год по месяцам")
+            self.tab7_canavas = MyMplCanavas(self.fig7)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
-            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
-            time.sleep(0.5)
-            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab7_layout.addWidget(self.tab7_navbar)
             self.tab7_layout.addWidget(self.tab7_canavas)
 
