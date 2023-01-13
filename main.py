@@ -1,4 +1,5 @@
 import sys
+import os
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from UI import Ui_QGroupBox
@@ -14,9 +15,14 @@ import matplotlib.pyplot as plt
 
 import db
 
-from statistic import pie_month, plot_month, bar_year
+from statistic import pie_month, plot_month, bar_year, plot_year_all
 
 from datetime import date
+
+from calendar import monthrange
+
+import time
+
 
 Session = sessionmaker(bind=db.engine)
 session = Session()
@@ -138,7 +144,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         self.tab6_pie_year.clicked.connect(self.tab6_year_pie_clicked)
         self.tab6_bar_year.clicked.connect(self.tab6_year_bar_clicked)
 
-        # self.tab6_pushButton.clicked.connect(self.tab6_get_pie_exp_clicked)
+        self.tab7_layout = QtWidgets.QVBoxLayout(self.tab7_widget)
+        self.tab7_plot.clicked.connect(self.tab7_plot_clicked)
 
     def tab1_add_button_clicked(self):
         with session:
@@ -487,12 +494,18 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig = pie_month(query, f"дохода за {months_dict[index]} по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
         except:
             self.fig = pie_month(query, f"дохода за {months_dict[index]} по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
 
@@ -504,20 +517,27 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
                 f"{date.today().year}-{selected_month(index)}-{31}",
             )
         )
+        days_in_month = monthrange(date.today().year, index)[1]
         try:
             self.fig.clear()
             self.tab5_layout.removeWidget(self.tab5_canavas)
             self.tab5_layout.removeWidget(self.tab5_navbar)
-            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}")
+            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}", days_in_month)
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
 
         except:
-            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}")
+            self.fig = plot_month(query, f"дохода по дням за {months_dict[index]}", days_in_month)
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
 
@@ -534,12 +554,18 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig = pie_month(query, f"дохода за год по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
         except:
             self.fig = pie_month(query, f"дохода за год по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
 
@@ -553,15 +579,21 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig.clear()
             self.tab5_layout.removeWidget(self.tab5_canavas)
             self.tab5_layout.removeWidget(self.tab5_navbar)
-            self.fig = bar_year(query, "дохода за год по месяцам", color="green")
+            self.fig = bar_year(query, "дохода за год по месяцам")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
         except:
-            self.fig = bar_year(query, "дохода за год по месяцам", color="green")
+            self.fig = bar_year(query, "дохода за год по месяцам")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
 
@@ -582,6 +614,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             )
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
         except:
@@ -590,6 +625,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             )
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
 
@@ -601,20 +639,27 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
                 f"{date.today().year}-{selected_month(index)}-{31}",
             )
         )
+        days_in_month = monthrange(date.today().year, index)[1]
         try:
             self.fig.clear()
             self.tab6_layout.removeWidget(self.tab6_canavas)
             self.tab6_layout.removeWidget(self.tab6_navbar)
-            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}")
+            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}", days_in_month)
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
 
         except:
-            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}")
+            self.fig = plot_month(query, f"расхода по дням за {months_dict[index]}", days_in_month)
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
 
@@ -631,12 +676,18 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig = pie_month(query, f"расхода за год по категориям")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
         except:
             self.fig = pie_month(query, f"расхода за год по категориям")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
 
@@ -650,25 +701,67 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.fig.clear()
             self.tab6_layout.removeWidget(self.tab6_canavas)
             self.tab6_layout.removeWidget(self.tab6_navbar)
-            self.fig = bar_year(query, "расхода за год по месяцам", color="red")
+            self.fig = bar_year(query, "расхода за год по месяцам")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
         except:
-            self.fig = bar_year(query, "расхода за год по месяцам", color="red")
+            self.fig = bar_year(query, "расхода за год по месяцам")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
+
+    def tab7_plot_clicked(self):
+        start_year = date(date.today().year, 1, 1)
+        end_year = date(date.today().year + 1, 1, 1)
+        exp_query = session.query(db.Expeness).filter(
+            and_(db.Expeness.date >= start_year, db.Expeness.date < end_year)
+        )
+        inc_query = session.query(db.Income).filter(
+            and_(db.Income.date >= start_year, db.Income.date < end_year)
+        )
+        try:
+            self.fig.clear()
+            self.tab7_layout.removeWidget(self.tab7_canavas)
+            self.tab7_layout.removeWidget(self.tab7_navbar)
+            self.fig = plot_year_all(query_inc=inc_query,
+                                     query_exp=exp_query,
+                                     name=f"Общая статистика за год по месяцам")
+            self.tab7_canavas = MyMplCanavas(self.fig)
+            self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            self.tab7_layout.addWidget(self.tab7_navbar)
+            self.tab7_layout.addWidget(self.tab7_canavas)
+        except:
+            self.fig = plot_year_all(query_inc=inc_query,
+                                     query_exp=exp_query,
+                                     name=f"Общая статистика за год по месяцам")
+            self.tab7_canavas = MyMplCanavas(self.fig)
+            self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            time.sleep(0.5)
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            self.tab7_layout.addWidget(self.tab7_navbar)
+            self.tab7_layout.addWidget(self.tab7_canavas)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    qssFile = "./stylesheet/Ubuntu.qss"
+    qssFile = "./stylesheet/myStyle.qss"
     with open(qssFile, "r") as fh:
         app.setStyleSheet(fh.read())
     w = MainClass()
+    w.resize(1280, 720)
     w.show()
 
     sys.exit(app.exec())

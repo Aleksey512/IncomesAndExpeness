@@ -1,0 +1,232 @@
+QGroupBox {
+	background-color: lightgray;
+}
+
+QTabWidget::pane {
+    border: 1px solid black;
+    background: white;
+}
+
+QTabWidget::tab-bar:top {
+    top: 1px;
+}
+
+QTabWidget::tab-bar:bottom {
+    bottom: 1px;
+}
+
+QTabWidget::tab-bar:left {
+    right: 1px;
+}
+
+QTabWidget::tab-bar:right {
+    left: 1px;
+}
+
+QTabBar::tab {
+    border: 1px solid black;
+    font-size: 14px;
+    height: 30px;
+	width: 150px;
+
+}
+
+QTabBar::tab:selected {
+    background: white;
+}
+
+QTabBar::tab:!selected {
+    background: silver;
+}
+
+QTabBar::tab:!selected:hover {
+    background: #999;
+}
+
+QTabBar::tab:top:!selected {
+    margin-top: 3px;
+}
+
+QTabBar::tab:bottom:!selected {
+    margin-bottom: 3px;
+}
+
+QTabBar::tab:top, QTabBar::tab:bottom {
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+}
+
+QTabBar::tab:top:selected {
+    border-bottom-color: none;
+}
+
+QTabBar::tab:bottom:selected {
+    border-top-color: none;
+}
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one {
+    margin-right: 0;
+}
+
+QTabBar::tab:left:!selected {
+    margin-right: 3px;
+}
+
+QTabBar::tab:right:!selected {
+    margin-left: 3px;
+}
+
+QTabBar::tab:left, QTabBar::tab:right {
+    min-height: 8ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+}
+
+QTabBar::tab:left:selected {
+    border-left-color: none;
+}
+
+QTabBar::tab:right:selected {
+    border-right-color: none;
+}
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
+    margin-bottom: 0;
+}
+
+QPushButton {
+	font-size: 16px;
+	height: 3ex;
+	width:  1ex;
+}
+
+#tab1_pushButton:hover {
+     background-color: rgba(13, 156, 0, 0.64);
+}
+#tab2_pushButton:hover {
+     background-color: rgba(13, 156, 0, 0.64);
+}
+#tab3_pushButton:hover {
+     background-color: rgba(13, 156, 0, 0.64);
+}
+#tab4_pushButton:hover {
+     background-color: rgba(13, 156, 0, 0.64);
+}
+#tab1_pushButton:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  #085c00, stop: 1 lightgreen);
+}
+#tab2_pushButton:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  #085c00, stop: 1 lightgreen);
+}
+#tab3_pushButton:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  #085c00, stop: 1 lightgreen);
+}
+#tab4_pushButton:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #085c00, stop: 1 lightgreen);
+}
+
+#tab1_pushButton_3:hover {
+     background-color: red;
+}
+#tab2_pushButton_3:hover {
+     background-color: red;
+}
+#tab3_pushButton_3:hover {
+     background-color: red;
+}
+#tab4_pushButton_3:hover {
+     background-color: red;
+}
+#tab1_pushButton_3:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  rgb(125, 0, 0), stop: 1 red);
+}
+#tab2_pushButton_3:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  rgb(125, 0, 0), stop: 1 red);
+}
+#tab3_pushButton_3:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  rgb(125, 0, 0), stop: 1 red);
+}
+#tab4_pushButton_3:pressed {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  rgb(125, 0, 0), stop: 1 red);
+}
+
+QLabel{
+	font-size: 16px;
+}
+
+#year_label {
+	font-size: 32px;
+	font-style: bold;
+}
+
+QDateEdit {
+	font-size: 16px;
+}
+
+QDoubleSpinBox{
+	font-size: 16px;
+}
+
+QComboBox {
+	font-size: 16px;
+}
+
+QCalendarWidget QToolButton {
+height: 60px;
+width: 150px;
+color: black;
+font-size: 24px;
+icon-size: 56px, 56px;
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 gray, stop: 1 lightgray);
+}
+QCalendarWidget QMenu {
+width: 150px;
+left: 20px;
+color: white;
+font-size: 18px;
+background-color: rgb(100, 100, 100);
+}
+QCalendarWidget QSpinBox {
+width: 150px;
+font-size:24px;
+color: black;
+background-color: whitesmoke;
+selection-background-color: rgb(136, 136, 136);
+selection-color: rgb(255, 255, 255);
+}
+QCalendarWidget QSpinBox::up-button { subcontrol-origin: border; subcontrol-position: top right; width:65px; }
+QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right; width:65px;}
+QCalendarWidget QSpinBox::up-arrow { width:56px; height:56px; }
+QCalendarWidget QSpinBox::down-arrow { width:56px; height:56px; }
+
+/* header row */
+QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }
+
+/* normal days */
+QCalendarWidget QAbstractItemView:enabled
+{
+font-size: 24px;
+font-style: bold;
+color: balck;
+background-color: lightgray;
+selection-background-color: rgb(64, 64, 64);
+selection-color: rgb(0, 255, 0);
+}
+
+/* navigation bar */
+QCalendarWidget QWidget#qt_calendar_navigationbar
+{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+color: black;
+font-style: italic;
+}
+
+/* days in other months */
+QCalendarWidget QAbstractItemView:disabled
+{
+color: lightgrey;
+font-style: italic;
+}

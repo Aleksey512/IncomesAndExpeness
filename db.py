@@ -8,6 +8,7 @@ from sqlalchemy import (
     Float,
     Date,
     Boolean,
+    MetaData
 )
 from sqlalchemy.orm import Session, declarative_base, relationship
 
@@ -52,4 +53,4 @@ class Expeness(Base):
         return f"Приход(id={self.id!r}, date={self.date!r}, value={self.value!r}, fact={self.fact!r})"
 
 
-initializaton = Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)

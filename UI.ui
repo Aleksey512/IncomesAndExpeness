@@ -40,6 +40,9 @@
      <property name="styleSheet">
       <string notr="true"/>
      </property>
+     <property name="locale">
+      <locale language="Russian" country="Russia"/>
+     </property>
      <property name="currentIndex">
       <number>4</number>
      </property>
@@ -67,8 +70,17 @@
            <strikeout>false</strikeout>
           </font>
          </property>
+         <property name="cursor" stdset="0">
+          <cursorShape>CrossCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
@@ -125,6 +137,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
+         </property>
          <property name="dateTime">
           <datetime>
            <hour>0</hour>
@@ -156,7 +171,7 @@
        <item row="4" column="0" colspan="2">
         <widget class="QPushButton" name="tab1_pushButton_3">
          <property name="styleSheet">
-          <string notr="true">background-color:  rgb(255, 47, 47)</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Удалить выделенные строки</string>
@@ -176,7 +191,7 @@
        <item row="8" column="2" colspan="2">
         <widget class="QPushButton" name="tab1_pushButton">
          <property name="styleSheet">
-          <string notr="true">background-color: green;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Добавить</string>
@@ -188,6 +203,9 @@
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QDateEdit" name="tab1_dateEdit_2">
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
+         </property>
          <property name="dateTime">
           <datetime>
            <hour>0</hour>
@@ -256,6 +274,9 @@
        </item>
        <item row="1" column="0">
         <widget class="QDateEdit" name="tab2_dateEdit_2">
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
+         </property>
          <property name="dateTime">
           <datetime>
            <hour>0</hour>
@@ -302,6 +323,9 @@
            <bold>false</bold>
            <strikeout>false</strikeout>
           </font>
+         </property>
+         <property name="cursor" stdset="0">
+          <cursorShape>CrossCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
@@ -389,6 +413,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
+         </property>
          <property name="dateTime">
           <datetime>
            <hour>0</hour>
@@ -446,6 +473,9 @@
        </item>
        <item row="1" column="0">
         <widget class="QDateEdit" name="tab3_dateEdit_2">
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
+         </property>
          <property name="dateTime">
           <datetime>
            <hour>0</hour>
@@ -492,6 +522,9 @@
            <bold>false</bold>
            <strikeout>false</strikeout>
           </font>
+         </property>
+         <property name="cursor" stdset="0">
+          <cursorShape>CrossCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
@@ -578,6 +611,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="locale">
+          <locale language="Russian" country="Russia"/>
          </property>
          <property name="dateTime">
           <datetime>
@@ -682,6 +718,9 @@
            <bold>false</bold>
            <strikeout>false</strikeout>
           </font>
+         </property>
+         <property name="cursor" stdset="0">
+          <cursorShape>CrossCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
