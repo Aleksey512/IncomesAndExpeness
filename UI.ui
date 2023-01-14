@@ -17,7 +17,7 @@
    <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+   <item alignment="Qt::AlignRight">
     <widget class="QLabel" name="year_label">
      <property name="font">
       <font>
@@ -37,6 +37,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
@@ -44,9 +47,18 @@
       <locale language="Russian" country="Russia"/>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <attribute name="title">
        <string>Доход(План)</string>
       </attribute>
@@ -68,10 +80,14 @@
            <italic>false</italic>
            <bold>false</bold>
            <strikeout>false</strikeout>
+           <stylestrategy>NoAntialias</stylestrategy>
           </font>
          </property>
          <property name="cursor" stdset="0">
           <cursorShape>CrossCursor</cursorShape>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
          </property>
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
@@ -91,12 +107,30 @@
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
          <property name="rowCount">
           <number>1</number>
          </property>
          <property name="columnCount">
           <number>4</number>
          </property>
+         <attribute name="horizontalHeaderVisible">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>100</number>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>30</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>50</number>
+         </attribute>
          <row/>
          <column>
           <property name="text">
@@ -345,6 +379,15 @@
          <property name="columnCount">
           <number>4</number>
          </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>30</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>50</number>
+         </attribute>
          <row/>
          <column>
           <property name="text">
@@ -544,6 +587,15 @@
          <property name="columnCount">
           <number>4</number>
          </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>30</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>50</number>
+         </attribute>
          <row/>
          <column>
           <property name="text">
@@ -740,6 +792,15 @@
          <property name="columnCount">
           <number>4</number>
          </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>30</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>50</number>
+         </attribute>
          <row/>
          <column>
           <property name="text">
@@ -978,7 +1039,7 @@
          <item>
           <widget class="QPushButton" name="tab7_hist">
            <property name="text">
-            <string>Гистограмма</string>
+            <string>Гистограмма(Не работает)</string>
            </property>
           </widget>
          </item>
@@ -998,6 +1059,283 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_8">
+      <attribute name="title">
+       <string>Общая информация</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="tab8_inc">
+             <property name="font">
+              <font>
+               <pointsize>22</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Доход</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="Line" name="line_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_all_fact">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Всего получено(Факт)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_all_plan">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Всего планировалось получить(План)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_relative">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Относительное отклонение от плана(%)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_absolute">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Абсолютное отклонение от плана(руб.)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Line" name="line_7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <widget class="QLabel" name="tab8_exp">
+             <property name="font">
+              <font>
+               <pointsize>22</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Расход</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="Line" name="line_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_all_fact_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Всего потрачено(Факт)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_all_plan_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Всего планировалось потратить(План)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_relative_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Относительное отклонение от плана(%)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="tab8_absolute_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Абсолютное отклонение от плана(руб.)</string>
+               </property>
+               <property name="scaledContents">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="tab8_refresh_button">
+         <property name="text">
+          <string>Показать данные</string>
          </property>
         </widget>
        </item>

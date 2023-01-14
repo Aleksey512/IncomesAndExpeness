@@ -98,7 +98,7 @@ QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
 }
 
 QPushButton {
-	font-size: 16px;
+	font-size: 22px;
 	height: 3ex;
 	width:  1ex;
 }
@@ -153,8 +153,12 @@ QPushButton {
      background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0  rgb(125, 0, 0), stop: 1 red);
 }
 
+QTableWidget QHeaderView{
+    font-size: 18pt;
+}
+
 QLabel{
-	font-size: 16px;
+	font-size: 22px;
 }
 
 #year_label {
@@ -162,16 +166,25 @@ QLabel{
 	font-style: bold;
 }
 
+#tab8_exp {
+    font-size: 32px;
+    color: red;
+}
+#tab8_inc {
+    font-size: 32px;
+    color: green;
+}
+
 QDateEdit {
-	font-size: 16px;
+	font-size: 20px;
 }
 
 QDoubleSpinBox{
-	font-size: 16px;
+	font-size: 20px;
 }
 
 QComboBox {
-	font-size: 16px;
+	font-size: 20px;
 }
 
 QCalendarWidget QToolButton {
@@ -217,3 +230,6 @@ QCalendarWidget QAbstractItemView:disabled
 color: lightgrey;
 font-style: italic;
 }
+
+
+

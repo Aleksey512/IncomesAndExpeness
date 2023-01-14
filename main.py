@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 import db
 
-from statistic import pie_month, plot_month, bar_year, plot_year_all
+from statistic import pie_month, plot_month, bar_year, plot_year_all, text_statistic
 
 from datetime import date
 
@@ -70,7 +70,6 @@ incomes_dict = {
     15: "Cтипендия",
 }
 
-
 def selected_month(index):
     """
     Если месяц от 1 до 9 добавляет 0 перед номером месяца
@@ -94,6 +93,9 @@ class MyMplCanavas(FigureCanvas):
 
 
 class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
+
+
+
     def __init__(self):
         super(MainClass, self).__init__()
 
@@ -114,6 +116,12 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         for expeness in expeness_dict.items():
             self.tab4_cbox_2.addItem(expeness[1])
             self.tab2_cbox_2.addItem(expeness[1])
+
+        self.tab1_table.viewport().installEventFilter(self)
+        self.tab2_table.viewport().installEventFilter(self)
+        self.tab3_table.viewport().installEventFilter(self)
+        self.tab4_table.viewport().installEventFilter(self)
+
 
         self.tab1_pushButton.clicked.connect(self.tab1_add_button_clicked)
         self.tab1_pushButton_2.clicked.connect(self.tab1_month_show_button_clicked)
@@ -149,6 +157,59 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
 
         self.tab7_layout = QtWidgets.QVBoxLayout(self.tab7_widget)
         self.tab7_plot.clicked.connect(self.tab7_plot_clicked)
+
+        self.tab8_refresh_button.clicked.connect(self.tab8_refresh_button_clicked)
+
+    def eventFilter(self, source, event):
+        if (source == self.tab1_table.viewport() and
+            event.type() == QtCore.QEvent.Wheel and
+            event.modifiers() == QtCore.Qt.ControlModifier):
+                if event.angleDelta().y() > 0:
+                    scale = self.tab1_table.font().pointSize() + 1
+                else:
+                    scale = self.tab1_table.font().pointSize() - 1
+
+                self.tab1_table.horizontalHeader().setStyleSheet("QHeaderView {"+f"font-size: {scale}pt;"+"}")
+
+                self.tab1_table.resizeColumnsToContents()
+                # do not propagate the event to the scroll area scrollbars
+
+        if (source == self.tab2_table.viewport() and
+            event.type() == QtCore.QEvent.Wheel and
+            event.modifiers() == QtCore.Qt.ControlModifier):
+                if event.angleDelta().y() > 0:
+                    scale = self.tab2_table.font().pointSize() + 1
+                else:
+                    scale = self.tab2_table.font().pointSize() - 1
+
+                self.tab2_table.horizontalHeader().setStyleSheet("QHeaderView {"+f"font-size: {scale}pt;"+"}")
+                self.tab2_table.resizeColumnsToContents()
+                # do not propagate the event to the scroll area scrollbars
+
+        if (source == self.tab3_table.viewport() and
+            event.type() == QtCore.QEvent.Wheel and
+            event.modifiers() == QtCore.Qt.ControlModifier):
+                if event.angleDelta().y() > 0:
+                    scale = self.tab3_table.font().pointSize() + 1
+                else:
+                    scale = self.tab3_table.font().pointSize() - 1
+
+                self.tab3_table.horizontalHeader().setStyleSheet("QHeaderView {"+f"font-size: {scale}pt;"+"}")
+                self.tab3_table.resizeColumnsToContents()
+                # do not propagate the event to the scroll area scrollbars
+        if (source == self.tab4_table.viewport() and
+            event.type() == QtCore.QEvent.Wheel and
+            event.modifiers() == QtCore.Qt.ControlModifier):
+                if event.angleDelta().y() > 0:
+                    scale = self.tab4_table.font().pointSize() + 1
+                else:
+                    scale = self.tab4_table.font().pointSize() - 1
+
+                self.tab4_table.horizontalHeader().setStyleSheet("QHeaderView {"+f"font-size: {scale}pt;"+"}")
+                self.tab4_table.resizeColumnsToContents()
+                # do not propagate the event to the scroll area scrollbars
+
+        return super().eventFilter(source, event)
 
     def tab1_add_button_clicked(self):
         """
@@ -539,9 +600,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             )
         )
         try:
-            self.fig.clear()
-            self.tab5_layout.removeWidget(self.tab5_canavas)
-            self.tab5_layout.removeWidget(self.tab5_navbar)
+            for i in reversed(range(self.tab5_layout.count())):
+                self.tab5_layout.itemAt(i).widget().setParent(None)
             self.fig = pie_month(query, f"дохода за {months_dict[index]} по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
@@ -570,9 +630,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         )
         days_in_month = monthrange(date.today().year, index)[1]
         try:
-            self.fig.clear()
-            self.tab5_layout.removeWidget(self.tab5_canavas)
-            self.tab5_layout.removeWidget(self.tab5_navbar)
+            for i in reversed(range(self.tab5_layout.count())):
+                self.tab5_layout.itemAt(i).widget().setParent(None)
             self.fig = plot_month(
                 query, f"дохода по дням за {months_dict[index]}", days_in_month
             )
@@ -603,9 +662,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Income.date >= start_year, db.Income.date < end_year)
         )
         try:
-            self.fig.clear()
-            self.tab5_layout.removeWidget(self.tab5_canavas)
-            self.tab5_layout.removeWidget(self.tab5_navbar)
+            for i in reversed(range(self.tab5_layout.count())):
+                self.tab5_layout.itemAt(i).widget().setParent(None)
             self.fig = pie_month(query, f"дохода за год по категориям")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
@@ -631,10 +689,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Income.date >= start_year, db.Income.date < end_year)
         )
         try:
-            self.fig.clear()
-            self.tab5_layout.removeWidget(self.tab5_canavas)
-            self.tab5_layout.removeWidget(self.tab5_navbar)
-            self.fig = bar_year(query, "дохода за год по месяцам")
+            for i in reversed(range(self.tab5_layout.count())):
+                self.tab5_layout.itemAt(i).widget().setParent(None)
+            self.fig = bar_year(query, "дохода за год по месяцам", color="#008000")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -643,7 +700,7 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab5_layout.addWidget(self.tab5_navbar)
             self.tab5_layout.addWidget(self.tab5_canavas)
         except:
-            self.fig = bar_year(query, "дохода за год по месяцам")
+            self.fig = bar_year(query, "дохода за год по месяцам", color="#008000")
             self.tab5_canavas = MyMplCanavas(self.fig)
             self.tab5_navbar = NavigationToolbar(self.tab5_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -661,9 +718,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             )
         )
         try:
-            self.fig.clear()
-            self.tab6_layout.removeWidget(self.tab6_canavas)
-            self.tab6_layout.removeWidget(self.tab6_navbar)
+            for i in reversed(range(self.tab6_layout.count())):
+                self.tab6_layout.itemAt(i).widget().setParent(None)
             self.fig = pie_month(
                 query, f"расхода за {months_dict[index]} по категориям"
             )
@@ -696,9 +752,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
         )
         days_in_month = monthrange(date.today().year, index)[1]
         try:
-            self.fig.clear()
-            self.tab6_layout.removeWidget(self.tab6_canavas)
-            self.tab6_layout.removeWidget(self.tab6_navbar)
+            for i in reversed(range(self.tab6_layout.count())):
+                self.tab6_layout.itemAt(i).widget().setParent(None)
             self.fig = plot_month(
                 query, f"расхода по дням за {months_dict[index]}", days_in_month
             )
@@ -729,9 +784,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Expeness.date >= start_year, db.Expeness.date < end_year)
         )
         try:
-            self.fig.clear()
-            self.tab6_layout.removeWidget(self.tab6_canavas)
-            self.tab6_layout.removeWidget(self.tab6_navbar)
+            for i in reversed(range(self.tab6_layout.count())):
+                self.tab6_layout.itemAt(i).widget().setParent(None)
             self.fig = pie_month(query, f"расхода за год по категориям")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
@@ -757,10 +811,9 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Expeness.date >= start_year, db.Expeness.date < end_year)
         )
         try:
-            self.fig.clear()
-            self.tab6_layout.removeWidget(self.tab6_canavas)
-            self.tab6_layout.removeWidget(self.tab6_navbar)
-            self.fig = bar_year(query, "расхода за год по месяцам")
+            for i in reversed(range(self.tab6_layout.count())):
+                self.tab6_layout.itemAt(i).widget().setParent(None)
+            self.fig = bar_year(query, "расхода за год по месяцам",  color="#ff0000")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -769,7 +822,7 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab6_layout.addWidget(self.tab6_navbar)
             self.tab6_layout.addWidget(self.tab6_canavas)
         except:
-            self.fig = bar_year(query, "расхода за год по месяцам")
+            self.fig = bar_year(query, "расхода за год по месяцам",  color="#ff0000")
             self.tab6_canavas = MyMplCanavas(self.fig)
             self.tab6_navbar = NavigationToolbar(self.tab6_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -788,15 +841,17 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             and_(db.Income.date >= start_year, db.Income.date < end_year)
         )
         try:
-            self.fig7.clear()
-            self.tab7_layout.removeWidget(self.tab7_canavas)
-            self.tab7_layout.removeWidget(self.tab7_navbar)
-            self.fig7 = plot_year_all(
+            for i in reversed(range(self.tab7_layout.count())):
+                self.tab7_layout.itemAt(i).widget().setParent(None)
+            # self.fig.clear()
+            # self.tab7_layout.removeWidget(self.tab7_canavas)
+            # self.tab7_layout.removeWidget(self.tab7_navbar)
+            self.fig = plot_year_all(
                 query_inc=inc_query,
                 query_exp=exp_query,
                 name=f"Общая статистика за год по месяцам",
             )
-            self.tab7_canavas = MyMplCanavas(self.fig7)
+            self.tab7_canavas = MyMplCanavas(self.fig)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
             time.sleep(0.5)
@@ -804,12 +859,12 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab7_layout.addWidget(self.tab7_navbar)
             self.tab7_layout.addWidget(self.tab7_canavas)
         except:
-            self.fig7 = plot_year_all(
+            self.fig = plot_year_all(
                 query_inc=inc_query,
                 query_exp=exp_query,
                 name=f"Общая статистика за год по месяцам",
             )
-            self.tab7_canavas = MyMplCanavas(self.fig7)
+            self.tab7_canavas = MyMplCanavas(self.fig)
             self.tab7_navbar = NavigationToolbar(self.tab7_canavas)
             self.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
             time.sleep(0.5)
@@ -818,9 +873,49 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
             self.tab7_layout.addWidget(self.tab7_canavas)
 
 
+    def tab8_refresh_button_clicked(self):
+        start_year = date(date.today().year, 1, 1)
+        end_year = date(date.today().year + 1, 1, 1)
+        exp_query = session.query(db.Expeness).filter(
+            and_(db.Expeness.date >= start_year, db.Expeness.date < end_year)
+        )
+        inc_query = session.query(db.Income).filter(
+            and_(db.Income.date >= start_year, db.Income.date < end_year)
+        )
+        try:
+            inc, exp = text_statistic(inc_query, exp_query)
+            self.tab8_all_fact.setText(f"Всего получено(Факт): {inc['all_f']:1.2f} руб.")
+            self.tab8_all_plan.setText(f"Всего планировалось получить(План): {inc['all_p']:1.2f} руб.")
+            self.tab8_relative.setText(f"Относительное отклонение от плана: {inc['relative']:1.2f} %")
+            if inc['relative'] >= 0:
+                self.tab8_relative.setStyleSheet("color: green;")
+            else:
+                self.tab8_relative.setStyleSheet("color: red;")
+            self.tab8_absolute.setText(f"Абсолютное отклонение от плана: {inc['absolute']:1.2f} руб.")
+            if inc['absolute'] >= 0:
+                self.tab8_absolute.setStyleSheet("color: green;")
+            else:
+                self.tab8_absolute.setStyleSheet("color: red;")
+
+            self.tab8_all_fact_2.setText(f"Всего потрачено(Факт): {exp['all_f']:1.2f} руб.")
+            self.tab8_all_plan_2.setText(f"Всего планировалось потратить(План): {exp['all_p']:1.2f} руб.")
+            self.tab8_relative_2.setText(f"Относительное отклонение от плана: {exp['relative']:1.2f} %")
+            if exp['relative'] >= 0:
+                self.tab8_relative_2.setStyleSheet("color: red;")
+            else:
+                self.tab8_relative_2.setStyleSheet("color: green;")
+            self.tab8_absolute_2.setText(f"Абсолютное отклонение от плана: {exp['absolute']:1.2f} руб.")
+            if exp['absolute'] >= 0:
+                self.tab8_absolute_2.setStyleSheet("color: red;")
+            else:
+                self.tab8_absolute_2.setStyleSheet("color: green;")
+        except Exception as e:
+            print(e)
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    qssFile = "./stylesheet/myStyle.qss"
+    qssFile = "stylesheet/myStyle.qss"
     with open(qssFile, "r") as fh:
         app.setStyleSheet(fh.read())
     w = MainClass()
