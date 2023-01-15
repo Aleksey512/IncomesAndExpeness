@@ -1,4 +1,4 @@
-# IncomesAndExpeness
+# Доход/расход
 ## Используемые библиотеки/фреймворки:
 - [PyQt5](https://doc.qt.io/qtforpython/)
 - [Pandas](https://pandas.pydata.org/)
