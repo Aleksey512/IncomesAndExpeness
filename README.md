@@ -12,9 +12,9 @@
 
 ## Способ запуска
 
-- *Создать виртуальное окружение (venv)*
+- Создать виртуальное окружение (venv)
   > python -m venv *Your venv name*
-- *Установить requirements из с помощью команды*
+- Установить requirements из с помощью команды
   > pip install requirements.txt
 - запустить скрипт *main.py*
   > python main.py
