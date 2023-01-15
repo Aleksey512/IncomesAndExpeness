@@ -101,6 +101,8 @@ class MainClass(QtWidgets.QGroupBox, Ui_QGroupBox):
 
         self.setupUi(self)
 
+        self.year_label.setText(f"{date.today().year}")
+
         for month in months_dict.items():
             self.tab6_cbox.addItem(month[1])
             self.tab5_cbox.addItem(month[1])
